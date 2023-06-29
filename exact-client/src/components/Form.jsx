@@ -24,9 +24,9 @@ const Form = () => {
 
   return (
     <form className="form" onSubmit={submitHandler}>
-      <Dropdown options={brands} placeholder="Select a brand" />
-      <Dropdown options={widthOptions} placeholder="Select a width" />
-      <Dropdown options={aspectRatioOptions} placeholder="Select an aspect ratio" />
+      <Dropdown options={brands} placeholder="Brand" />
+      <Dropdown options={widthOptions} placeholder="Width" />
+      <Dropdown options={aspectRatioOptions} placeholder="Ratio" />
     </form>
   );
 };
