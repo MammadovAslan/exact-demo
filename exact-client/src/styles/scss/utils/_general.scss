@@ -1,0 +1,31 @@
+@import "./variables";
+@import "./mixins";
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  ff &:before,
+  &:after {
+    margin: 0;
+    padding: 0;
+  }
+
+  outline: none;
+}
+
+input,
+button {
+  border: none;
+  @include easeTransition(0.2s);
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  background-color: $lightGray;
+}
