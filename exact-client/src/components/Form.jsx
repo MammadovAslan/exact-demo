@@ -1,43 +1,33 @@
-import { useState } from "react";
-import axiosInstance from "../axios/axiosInstance";
+import Dropdown from "./Dropdown";
+
+const brands = [
+  "Michelin",
+  "Continental",
+  "Bridgestone",
+  "Pirelli",
+  "Goodyear",
+  "Dunlop",
+  "Yokohama",
+  "Hankook",
+  "Falken",
+  "Toyo",
+];
+
+const widthOptions = ["205", "215", "225", "235", "245", "255", "265", "275", "285", "295"];
+
+const aspectRatioOptions = ["30", "35", "40", "45", "50", "55", "60", "65", "70", "75"];
+
 const Form = () => {
-  const [value, setValue] = useState("");
-  const [data, setData] = useState();
-
-  const apiUrl = import.meta.env.VITE_API_URL;
-
-  const changeHandler = (e) => {
-    setValue(e.target.value);
-  };
-
   const submitHandler = (e) => {
     e.preventDefault();
-    const queryObject = {};
-    const query = value
-      .split(",")
-      .map((el) => el.trim())
-      .forEach((el) => {
-        const q = el.split(" ");
-        queryObject[q[0]] = isNaN(+q[1]) ? q[1] : +q[1];
-      });
-
-    console.log(queryObject);
-    getData(queryObject);
-  };
-
-  const getData = async (queries) => {
-    try {
-      const response = await axiosInstance.post("/endpoint", queries);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   return (
     <form className="form" onSubmit={submitHandler}>
-      <input type="text" onChange={changeHandler} value={value} />
-      <button className="submit-button">submit</button>
+      <Dropdown options={brands} placeholder="Select a brand" />
+      <Dropdown options={widthOptions} placeholder="Select a width" />
+      <Dropdown options={aspectRatioOptions} placeholder="Select an aspect ratio" />
+      {/* Add more Dropdown components for additional selects */}
     </form>
   );
 };
