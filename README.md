@@ -10,7 +10,12 @@ cd exact-client
 ```
 ### 3.Instal Node Packages
 ```console
-npm install or npm i
+npm install
+```
+or 
+
+```console
+npm i
 ```
 ### 4.Run Application
 ```console
