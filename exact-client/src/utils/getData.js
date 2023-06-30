@@ -8,7 +8,7 @@ const getData = async (expr, setProducts) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        limit: 5,
+        limit: 20,
         expr: expr,
       }),
     });

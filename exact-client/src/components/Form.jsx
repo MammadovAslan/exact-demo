@@ -29,7 +29,7 @@ const Form = ({ products, setProducts }) => {
         });
 
         if (!isFirst) {
-          string += " && ";
+          string += " and ";
         } else {
           isFirst = false;
         }
@@ -50,7 +50,7 @@ const Form = ({ products, setProducts }) => {
   }, [queries]);
 
   useEffect(() => {
-    !!queriesString && getData(queriesString, setProducts);
+     getData(queriesString ? queriesString : true, setProducts);
   }, [queriesString]);
 
   useEffect(() => {

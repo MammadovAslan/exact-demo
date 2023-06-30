@@ -30,7 +30,7 @@ section {
       animation: underline 0.5s linear 1s;
       animation-fill-mode: forwards;
     }
-    @media (max-width: 768px) {
+    @include for-tablet-landscape {
       font-size: 1.3em;
     }
   }
