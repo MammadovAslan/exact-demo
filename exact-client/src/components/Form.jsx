@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
 import getProperty from "../utils/getProperty";
-
-const Form = ({ products }) => {
+import getData from "../utils/getData";
+const Form = ({ products, setProducts }) => {
   const [brandsOptions, setBrands] = useState([]);
   const [widthOptions, setWidthOptions] = useState([]);
   const [aspectRatioOptions, setAspectRatioOptions] = useState([]);
@@ -16,18 +16,50 @@ const Form = ({ products }) => {
     rimDiameter: [],
   });
 
+  const [queriesString, setQueriesString] = useState("");
+
+  const queryStringify = () => {
+    let string = "";
+    let isFirst = true;
+
+    for (const key in queries) {
+      if (queries[key].length > 0) {
+        const selects = queries[key].map((el) => {
+          return isNaN(+el) ? `'${el}'` : el;
+        });
+
+        if (!isFirst) {
+          string += " && ";
+        } else {
+          isFirst = false;
+        }
+
+        string += `${key} in [${selects.join(",")}]`;
+      }
+    }
+
+    return string;
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
-
-
-
   };
 
   useEffect(() => {
-    setBrands(getProperty(products, "brand"));
-    setWidthOptions(getProperty(products, "width"));
-    setAspectRatioOptions(getProperty(products, "aspectRatio"));
-    setRimDiameterOptions(getProperty(products, "rimDiameter"));
+    setQueriesString(queryStringify());
+  }, [queries]);
+
+  useEffect(() => {
+    !!queriesString && getData(queriesString, setProducts);
+  }, [queriesString]);
+
+  useEffect(() => {
+    if (products) {
+      setBrands(getProperty(products, "brand"));
+      setWidthOptions(getProperty(products, "width"));
+      setAspectRatioOptions(getProperty(products, "aspectRatio"));
+      setRimDiameterOptions(getProperty(products, "rimDiameter"));
+    }
   }, [products]);
 
   return (
@@ -91,7 +123,8 @@ Form.propTypes = {
       reinforcedSidewalls: PropTypes.bool.isRequired,
       fuelEfficiencyRating: PropTypes.string.isRequired,
     })
-  ).isRequired,
+  ),
+  setProducts: PropTypes.func.isRequired,
 };
 
 export default Form;

@@ -28,6 +28,7 @@ Dropdown.propTypes = {
   placeholder: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
   property: PropTypes.string.isRequired,
+  // multi: PropTypes.bool
 };
 
 export default Dropdown;

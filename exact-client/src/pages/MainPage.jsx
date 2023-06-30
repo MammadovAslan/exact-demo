@@ -8,7 +8,7 @@ const MainPage = () => {
 
   return (
     <div>
-      <Form products={products}/>
+      <Form products={products} setProducts={setProducts}/>
       <ProductsContainer products={products} setProducts={setProducts}/>
     </div>
   );
