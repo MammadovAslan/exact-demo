@@ -14,6 +14,23 @@
   }
 
   outline: none;
+
+  ::-webkit-scrollbar {
+    width: 3px;
+    &-thumb {
+      background-color: #888;
+      border-radius: 2px;
+      &:hover {
+        background-color: #555;
+      }
+    }
+    &-track {
+      background-color: #f1f1f1;
+      &:hover {
+        background-color: #ddd;
+      }
+    }
+  }
 }
 
 input,
