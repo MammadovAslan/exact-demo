@@ -1,0 +1,41 @@
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.price-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  @include for-mobile-landscape {
+    flex-direction: column;
+  }
+
+  .price-title {
+    font-weight: 500;
+  }
+  .inputs-container {
+    display: flex;
+    gap: 1rem;
+
+    .price-input-label {
+      display: flex;
+      flex-direction: column;
+      .price-input {
+        width: 5rem;
+        border-radius: 4px;
+        padding: 0.2rem 0.5rem;
+        border: 1px solid $semilightGray;
+        @include easeTransition(0.2s);
+
+        &:focus {
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

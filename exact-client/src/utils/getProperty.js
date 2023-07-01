@@ -1,4 +1,4 @@
-const getProperty = (data, property) => {
+export const getProperty = (data, property) => {
   return data.length > 0
     ? [
         ...new Set(
@@ -12,4 +12,8 @@ const getProperty = (data, property) => {
     : [];
 };
 
-export default getProperty;
+export const getPrice = (data, isMin) => {
+  const price = data.sort((a, b) => (isMin ? a?.price - b?.price : b?.price - a?.price))[0]?.price;
+
+  return parseInt(price);
+};

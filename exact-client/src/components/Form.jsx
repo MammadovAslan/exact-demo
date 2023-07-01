@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
-import getProperty from "../utils/getProperty";
+import { getProperty, getPrice } from "../utils/getProperty";
 import getData from "../utils/getData";
+import PriceInput from "./PriceInput";
 const Form = ({ products, setProducts }) => {
   const [brandsOptions, setBrands] = useState([]);
   const [widthOptions, setWidthOptions] = useState([]);
@@ -14,6 +15,8 @@ const Form = ({ products, setProducts }) => {
     width: [],
     aspectRatio: [],
     rimDiameter: [],
+    minPrice: 0,
+    maxPrice: 0,
   });
 
   const [queriesString, setQueriesString] = useState("");
@@ -23,7 +26,7 @@ const Form = ({ products, setProducts }) => {
     let isFirst = true;
 
     for (const key in queries) {
-      if (queries[key].length > 0) {
+      if (Array.isArray(queries[key]) && queries[key].length > 0) {
         const selects = queries[key].map((el) => {
           return isNaN(+el) ? `'${el}'` : el;
         });
@@ -47,18 +50,22 @@ const Form = ({ products, setProducts }) => {
 
   useEffect(() => {
     setQueriesString(queryStringify());
+    console.log(queries)
   }, [queries]);
 
   useEffect(() => {
-     getData(queriesString || true, setProducts);
+    // getData(queriesString || true, setProducts);
   }, [queriesString]);
 
   useEffect(() => {
-    if (products) {
+    if (products.length>0) {
       setBrands(getProperty(products, "brand"));
       setWidthOptions(getProperty(products, "width"));
       setAspectRatioOptions(getProperty(products, "aspectRatio"));
       setRimDiameterOptions(getProperty(products, "rimDiameter"));
+
+      setQueries((prev) => ({ ...prev, minPrice: getPrice(products, true) }));
+      setQueries((prev) => ({ ...prev, maxPrice: getPrice(products, false) }));
     }
   }, [products]);
 
@@ -67,29 +74,30 @@ const Form = ({ products, setProducts }) => {
       <div className="selects-container">
         <Dropdown
           options={brandsOptions}
-          placeholder="Brand"
+          placeholder="brand"
           setValue={setQueries}
           property="brand"
         />
         <Dropdown
           options={widthOptions}
-          placeholder="Width"
+          placeholder="width"
           setValue={setQueries}
           property="width"
         />
         <Dropdown
           options={rimDiameterOptions}
-          placeholder="Diameter"
+          placeholder="diameter"
           setValue={setQueries}
           property="rimDiameter"
         />
         <Dropdown
           options={aspectRatioOptions}
-          placeholder="Ratio"
+          placeholder="ratio"
           setValue={setQueries}
           property="aspectRatio"
         />
       </div>
+      <PriceInput setValue={setQueries} maxPrice={queries.maxPrice} minPrice={queries.minPrice} />
     </form>
   );
 };

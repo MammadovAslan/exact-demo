@@ -42,6 +42,10 @@ body {
   background-color: rgb(240, 235, 235);
 }
 
+label {
+  text-transform: capitalize;
+}
+
 .products-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -245,4 +249,40 @@ section .text-shadow:hover {
 }
 .form .submit-button:active {
   opacity: 1;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+@media (max-width: 568px) {
+  .price-container {
+    flex-direction: column;
+  }
+}
+.price-container .price-title {
+  font-weight: 500;
+}
+.price-container .inputs-container {
+  display: flex;
+  gap: 1rem;
+}
+.price-container .inputs-container .price-input-label {
+  display: flex;
+  flex-direction: column;
+}
+.price-container .inputs-container .price-input-label .price-input {
+  width: 5rem;
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid rgb(198, 198, 198);
+  transition: 0.2s ease;
+}
+.price-container .inputs-container .price-input-label .price-input:focus {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.price-container .inputs-container .price-input-label .price-input::-webkit-inner-spin-button, .price-container .inputs-container .price-input-label .price-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
