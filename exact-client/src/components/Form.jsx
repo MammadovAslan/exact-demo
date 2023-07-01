@@ -50,7 +50,7 @@ const Form = ({ products, setProducts }) => {
   }, [queries]);
 
   useEffect(() => {
-     getData(queriesString ? queriesString : true, setProducts);
+     getData(queriesString || true, setProducts);
   }, [queriesString]);
 
   useEffect(() => {

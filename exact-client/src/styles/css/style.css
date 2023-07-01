@@ -44,7 +44,8 @@ body {
 
 .products-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  place-items: center;
   grid-gap: 2rem;
   margin: 2rem;
 }
@@ -82,7 +83,7 @@ section h1:after {
   animation: underline 0.5s linear 1s;
   animation-fill-mode: forwards;
 }
-@media (max-width: 768px) {
+@media (max-width: 988px) {
   section h1 {
     font-size: 1.3em;
   }
@@ -151,6 +152,7 @@ section .text-shadow:hover {
   aspect-ratio: 1/1/6;
   gap: 1rem;
   overflow: hidden;
+  width: 12rem;
   transition: 0.2s ease;
 }
 @media (max-width: 568px) {
@@ -163,13 +165,7 @@ section .text-shadow:hover {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 .product .tire-image {
-  width: 100%;
-  height: auto;
-}
-@media (max-width: 568px) {
-  .product .tire-image {
-    width: 9rem;
-  }
+  width: 10rem;
 }
 .product .content {
   position: absolute;
