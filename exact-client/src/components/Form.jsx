@@ -30,7 +30,6 @@ const Form = ({ products, setProducts }) => {
         const selects = queries[key].map((el) => {
           return isNaN(+el) ? `'${el}'` : el;
         });
-
         if (!isFirst) {
           string += " and ";
         } else {
@@ -38,39 +37,50 @@ const Form = ({ products, setProducts }) => {
         }
 
         string += `${key} in [${selects.join(",")}]`;
+      } else if (key === "minPrice" || key === "maxPrice") {
+        const operator = key === "minPrice" ? ">" : "<";
+        if (!isFirst) {
+          string += " and ";
+        } else {
+          isFirst = false;
+        }
+        string += `price${operator}${queries[key]}`;
       }
     }
 
     return string;
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-  };
-
   useEffect(() => {
     setQueriesString(queryStringify());
-    console.log(queries)
+    // console.log(queryStringify())
   }, [queries]);
 
-  useEffect(() => {
-    // getData(queriesString || true, setProducts);
-  }, [queriesString]);
+
+
+
+const handleSubmit =(e) =>{
+  e.preventDefault()
+  getData(queriesString || true, setProducts)
+}
+
 
   useEffect(() => {
-    if (products.length>0) {
+    if (products.length > 0) {
+      //get select options
       setBrands(getProperty(products, "brand"));
       setWidthOptions(getProperty(products, "width"));
       setAspectRatioOptions(getProperty(products, "aspectRatio"));
       setRimDiameterOptions(getProperty(products, "rimDiameter"));
 
+      //get min and max prices
       setQueries((prev) => ({ ...prev, minPrice: getPrice(products, true) }));
       setQueries((prev) => ({ ...prev, maxPrice: getPrice(products, false) }));
     }
   }, [products]);
 
   return (
-    <form className="form" onSubmit={submitHandler}>
+    <form className="form" onSubmit={handleSubmit}>
       <div className="selects-container">
         <Dropdown
           options={brandsOptions}
@@ -98,6 +108,7 @@ const Form = ({ products, setProducts }) => {
         />
       </div>
       <PriceInput setValue={setQueries} maxPrice={queries.maxPrice} minPrice={queries.minPrice} />
+    <button className="submit-button">submit</button>
     </form>
   );
 };
