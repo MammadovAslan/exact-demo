@@ -1,0 +1,72 @@
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.sort-inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  flex: 2;
+  .sort-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    .input-container {
+      .sort-input {
+        display: none;
+        &:checked ~ label {
+          &:before {
+            width: 0.35rem;
+            height: 2px;
+            background-color: $green;
+            transform: rotate(45deg);
+            left: -18%;
+            top: 50%;
+          }
+          &:after {
+            width: 0.7rem;
+            height: 2px;
+            background-color: $green;
+            transform: rotate(-45deg);
+            left: -15%;
+            top: 45%;
+          }
+        }
+      }
+
+      label {
+        position: relative;
+        cursor: pointer;
+        &:before,
+        &:after {
+          position: absolute;
+          content: "";
+          @include easeTransition(0.2s);
+        }
+        &:hover {
+          color: $green;
+          font-weight: 600;
+        }
+      }
+    }
+    .title {
+      margin-bottom: 0.7rem;
+    }
+    .reset-button {
+      padding: 0.2rem 0.5rem;
+      background-color: $lightPurple;
+      border-radius: 4px;
+      text-transform: uppercase;
+      color: #fff;
+      @include easeTransition(0.2s);
+      &:hover {
+        opacity: 0.6;
+      }
+      &:active {
+        opacity: 1;
+      }
+    }
+  }
+}

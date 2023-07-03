@@ -6,12 +6,14 @@ import getData from "../utils/getData";
 import PriceInput from "./PriceInput";
 import RangeSlider from "./RangeSlider";
 import { queryStringify } from "../utils/helpers";
+import SortInput from "./SortInput";
 
 const Form = ({ products, setProducts }) => {
   const [brandsOptions, setBrands] = useState([]);
   const [widthOptions, setWidthOptions] = useState([]);
   const [aspectRatioOptions, setAspectRatioOptions] = useState([]);
   const [rimDiameterOptions, setRimDiameterOptions] = useState([]);
+  const [priceSort, setPriceSort] = useState(null);
 
   const [userPrice, setUserPrice] = useState(false);
 
@@ -28,7 +30,12 @@ const Form = ({ products, setProducts }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getData(queriesString || true, setProducts);
+    getData(
+      queriesString || true,
+      setProducts,
+      priceSort ? "price" : "",
+      priceSort ? priceSort : 0
+    );
   };
 
   useEffect(() => {
@@ -83,23 +90,33 @@ const Form = ({ products, setProducts }) => {
           property="aspectRatio"
         />
       </div>
-      <div className="price-inputs-container">
-        <h4 className="price-title">Price:</h4>
-        <PriceInput
-          setUserPrice={setUserPrice}
-          setValue={setQueries}
-          maxPrice={queries.maxPrice}
-          minPrice={queries.minPrice}
-        />
+      <div className="controls">
+        <div className="price-inputs-container">
+          <h4 className="title">Price:</h4>
+          <PriceInput
+            setUserPrice={setUserPrice}
+            setValue={setQueries}
+            maxPrice={queries.maxPrice}
+            minPrice={queries.minPrice}
+          />
 
-        <RangeSlider
-          onChange={({ min, max }) => {
-            setQueries((prev) => ({ ...prev, minPrice: min, maxPrice: max }));
-            setUserPrice(true);
-          }}
-          min={50}
-          max={300}
-        />
+          <RangeSlider
+            onChange={({ min, max }) => {
+              setQueries((prev) => ({ ...prev, minPrice: min, maxPrice: max }));
+              setUserPrice(true);
+            }}
+            min={50}
+            max={300}
+          />
+        </div>
+        <div className="sort-inputs-container">
+          <SortInput
+            id="price-sort"
+            value={priceSort}
+            setValue={setPriceSort}
+            setUserPrice={setUserPrice}
+          />
+        </div>
       </div>
       <button className="submit-button">submit</button>
     </form>

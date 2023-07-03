@@ -1,6 +1,7 @@
 @import "../utils/variables";
 @import "../utils/mixins";
 .container {
+  margin-top: 2rem;
   @include for-mobile-landscape {
     height: 5rem;
   }
@@ -82,5 +83,4 @@
       position: relative;
     }
   }
-
 }
