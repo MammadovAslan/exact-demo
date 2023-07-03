@@ -98,7 +98,7 @@ const Form = ({ products, setProducts }) => {
             setUserPrice(true);
           }}
           min={50}
-          max={500}
+          max={300}
         />
       </div>
       <button className="submit-button">submit</button>
