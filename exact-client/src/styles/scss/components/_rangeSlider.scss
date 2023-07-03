@@ -24,12 +24,10 @@
     &__track {
       background-color: #ced4da;
       width: 100%;
-      z-index: 1;
     }
 
     &__range {
       background-color: $lightPurple;
-      z-index: 2;
     }
 
     &__left-value {
@@ -85,13 +83,4 @@
     }
   }
 
-  /* Removing the default appearance */
-
-  .thumb--left {
-    z-index: 3;
-  }
-
-  .thumb--right {
-    z-index: 4;
-  }
 }

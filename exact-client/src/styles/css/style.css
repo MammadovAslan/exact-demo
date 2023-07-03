@@ -293,9 +293,6 @@ section .text-shadow:hover {
   margin: 0;
 }
 
-.container {
-  /* Removing the default appearance */
-}
 @media (max-width: 568px) {
   .container {
     height: 5rem;
@@ -315,11 +312,9 @@ section .text-shadow:hover {
 .container .slider__track {
   background-color: #ced4da;
   width: 100%;
-  z-index: 1;
 }
 .container .slider__range {
   background-color: rgb(142, 142, 238);
-  z-index: 2;
 }
 .container .slider__left-value {
   left: 6px;
@@ -367,10 +362,4 @@ section .text-shadow:hover {
   margin-top: 4px;
   pointer-events: all;
   position: relative;
-}
-.container .thumb--left {
-  z-index: 3;
-}
-.container .thumb--right {
-  z-index: 4;
 }
