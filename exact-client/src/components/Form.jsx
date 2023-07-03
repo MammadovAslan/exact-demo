@@ -4,6 +4,7 @@ import Dropdown from "./Dropdown";
 import { getProperty, getPrice } from "../utils/getProperty";
 import getData from "../utils/getData";
 import PriceInput from "./PriceInput";
+import RangeSlider from "./RangeSlider";
 import { queryStringify } from "../utils/helpers";
 
 const Form = ({ products, setProducts }) => {
@@ -82,12 +83,24 @@ const Form = ({ products, setProducts }) => {
           property="aspectRatio"
         />
       </div>
-      <PriceInput
-        setUserPrice={setUserPrice}
-        setValue={setQueries}
-        maxPrice={queries.maxPrice}
-        minPrice={queries.minPrice}
-      />
+      <div className="price-inputs-container">
+        <h4 className="price-title">Price:</h4>
+        <PriceInput
+          setUserPrice={setUserPrice}
+          setValue={setQueries}
+          maxPrice={queries.maxPrice}
+          minPrice={queries.minPrice}
+        />
+
+        <RangeSlider
+          onChange={({ min, max }) => {
+            setQueries((prev) => ({ ...prev, minPrice: min, maxPrice: max }));
+            setUserPrice(true);
+          }}
+          min={50}
+          max={500}
+        />
+      </div>
       <button className="submit-button">submit</button>
     </form>
   );

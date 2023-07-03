@@ -29,7 +29,6 @@ const PriceInput = ({ setValue, minPrice, maxPrice, setUserPrice }) => {
 
   return (
     <div className="price-container">
-      <h4 className="price-title">Price:</h4>
       <div className="inputs-container">
         <label className="price-input-label">
           min:
