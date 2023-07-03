@@ -1,14 +1,18 @@
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import Dropdown from "./Dropdown";
 import { getProperty, getPrice } from "../utils/getProperty";
 import getData from "../utils/getData";
 import PriceInput from "./PriceInput";
+import { queryStringify } from "../utils/helpers";
+
 const Form = ({ products, setProducts }) => {
   const [brandsOptions, setBrands] = useState([]);
   const [widthOptions, setWidthOptions] = useState([]);
   const [aspectRatioOptions, setAspectRatioOptions] = useState([]);
   const [rimDiameterOptions, setRimDiameterOptions] = useState([]);
+
+  const [userPrice, setUserPrice] = useState(false);
 
   const [queries, setQueries] = useState({
     brand: [],
@@ -21,63 +25,34 @@ const Form = ({ products, setProducts }) => {
 
   const [queriesString, setQueriesString] = useState("");
 
-  const queryStringify = () => {
-    let string = "";
-    let isFirst = true;
-
-    for (const key in queries) {
-      if (Array.isArray(queries[key]) && queries[key].length > 0) {
-        const selects = queries[key].map((el) => {
-          return isNaN(+el) ? `'${el}'` : el;
-        });
-        if (!isFirst) {
-          string += " and ";
-        } else {
-          isFirst = false;
-        }
-
-        string += `${key} in [${selects.join(",")}]`;
-      } else if (key === "minPrice" || key === "maxPrice") {
-        const operator = key === "minPrice" ? ">" : "<";
-        if (!isFirst) {
-          string += " and ";
-        } else {
-          isFirst = false;
-        }
-        string += `price${operator}${queries[key]}`;
-      }
-    }
-
-    return string;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getData(queriesString || true, setProducts);
   };
 
   useEffect(() => {
-    setQueriesString(queryStringify());
-    // console.log(queryStringify())
-  }, [queries]);
-
-
-
-
-const handleSubmit =(e) =>{
-  e.preventDefault()
-  getData(queriesString || true, setProducts)
-}
-
-
-  useEffect(() => {
     if (products.length > 0) {
+      if (!userPrice) {
+        //get min and max prices
+        setQueries((prev) => ({
+          ...prev,
+          minPrice: getPrice(products, true),
+          maxPrice: getPrice(products, false),
+        }));
+      }
+
       //get select options
       setBrands(getProperty(products, "brand"));
       setWidthOptions(getProperty(products, "width"));
       setAspectRatioOptions(getProperty(products, "aspectRatio"));
       setRimDiameterOptions(getProperty(products, "rimDiameter"));
-
-      //get min and max prices
-      setQueries((prev) => ({ ...prev, minPrice: getPrice(products, true) }));
-      setQueries((prev) => ({ ...prev, maxPrice: getPrice(products, false) }));
+      setUserPrice(false);
     }
   }, [products]);
+
+  useEffect(() => {
+    setQueriesString(queryStringify(queries));
+  }, [queries]);
 
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -107,8 +82,13 @@ const handleSubmit =(e) =>{
           property="aspectRatio"
         />
       </div>
-      <PriceInput setValue={setQueries} maxPrice={queries.maxPrice} minPrice={queries.minPrice} />
-    <button className="submit-button">submit</button>
+      <PriceInput
+        setUserPrice={setUserPrice}
+        setValue={setQueries}
+        maxPrice={queries.maxPrice}
+        minPrice={queries.minPrice}
+      />
+      <button className="submit-button">submit</button>
     </form>
   );
 };
@@ -146,4 +126,4 @@ Form.propTypes = {
   setProducts: PropTypes.func.isRequired,
 };
 
-export default Form;
+export default memo(Form);

@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import useDebounce from "../hooks/useDebounce";
 
-const PriceInput = ({ setValue, minPrice, maxPrice }) => {
+const PriceInput = ({ setValue, minPrice, maxPrice, setUserPrice }) => {
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(0);
 
-  const debouncedMin = useDebounce(min, 1000);
-  const debouncedMax = useDebounce(max, 1000);
+  const debouncedMin = useDebounce(min, 100);
+  const debouncedMax = useDebounce(max, 100);
 
   const handleChange = (e) => {
     if (e.target.id === "min-price") {
@@ -15,6 +15,7 @@ const PriceInput = ({ setValue, minPrice, maxPrice }) => {
     } else if (e.target.id === "max-price") {
       setMax(+e.target.value);
     }
+    setUserPrice(true);
   };
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const PriceInput = ({ setValue, minPrice, maxPrice }) => {
         <label className="price-input-label">
           min:
           <input
-            type="number"
+            type="text"
             className="price-input min-price"
             id="min-price"
             value={min}
@@ -43,7 +44,7 @@ const PriceInput = ({ setValue, minPrice, maxPrice }) => {
         <label className="price-input-label">
           max:
           <input
-            type="number"
+            type="text"
             className="price-input max-price"
             id="max-price"
             value={max}
@@ -57,6 +58,7 @@ const PriceInput = ({ setValue, minPrice, maxPrice }) => {
 
 PriceInput.propTypes = {
   setValue: PropTypes.func.isRequired,
+  setUserPrice: PropTypes.func.isRequired,
   minPrice: PropTypes.number,
   maxPrice: PropTypes.number,
 };
