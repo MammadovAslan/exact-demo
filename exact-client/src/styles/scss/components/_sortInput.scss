@@ -3,8 +3,7 @@
 
 .sort-inputs-container {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  gap: 3rem;
   height: 100%;
   flex: 2;
   .sort-container {
@@ -13,6 +12,10 @@
     align-items: start;
     justify-content: space-between;
     gap: 0.5rem;
+    @include for-mobile-landscape {
+      align-items: center;
+      gap: 1rem;
+    }
     .input-container {
       .sort-input {
         display: none;
@@ -21,6 +24,7 @@
             width: 0.35rem;
             height: 2px;
             background-color: $green;
+            border: none;
             transform: rotate(45deg);
             left: -18%;
             top: 50%;
@@ -43,7 +47,16 @@
         &:after {
           position: absolute;
           content: "";
-          @include easeTransition(0.2s);
+          @include easeTransition(0.1s);
+        }
+
+        &:before {
+          width: 0.7rem;
+          height: 0.7rem;
+          border: 1px solid black;
+          border-radius: 50%;
+          left: -15px;
+          top: 3px;
         }
         &:hover {
           color: $green;
@@ -56,7 +69,7 @@
     }
     .reset-button {
       padding: 0.2rem 0.5rem;
-      background-color: $lightPurple;
+      background-color: $gray;
       border-radius: 4px;
       text-transform: uppercase;
       color: #fff;

@@ -15,7 +15,7 @@ export const queryStringify = (queries) => {
 
       string += `${key} in [${selects.join(",")}]`;
     } else if (key === "minPrice" || key === "maxPrice") {
-      const operator = key === "minPrice" ? ">" : "<";
+      const operator = key === "minPrice" ? ">=" : "<=";
       if (!isFirst) {
         string += " and ";
       } else {
@@ -27,4 +27,3 @@ export const queryStringify = (queries) => {
 
   return string;
 };
-

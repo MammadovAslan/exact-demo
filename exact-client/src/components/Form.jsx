@@ -14,6 +14,7 @@ const Form = ({ products, setProducts }) => {
   const [aspectRatioOptions, setAspectRatioOptions] = useState([]);
   const [rimDiameterOptions, setRimDiameterOptions] = useState([]);
   const [priceSort, setPriceSort] = useState(null);
+  const [ratingSort, setRatingSort] = useState(null);
 
   const [userPrice, setUserPrice] = useState(false);
 
@@ -96,18 +97,18 @@ const Form = ({ products, setProducts }) => {
           <PriceInput
             setUserPrice={setUserPrice}
             setValue={setQueries}
-            maxPrice={queries.maxPrice}
             minPrice={queries.minPrice}
+            maxPrice={queries.maxPrice}
           />
 
-          <RangeSlider
+          {/* <RangeSlider
             onChange={({ min, max }) => {
               setQueries((prev) => ({ ...prev, minPrice: min, maxPrice: max }));
               setUserPrice(true);
             }}
             min={50}
-            max={300}
-          />
+            max={5000}
+          /> */}
         </div>
         <div className="sort-inputs-container">
           <SortInput
@@ -115,7 +116,15 @@ const Form = ({ products, setProducts }) => {
             value={priceSort}
             setValue={setPriceSort}
             setUserPrice={setUserPrice}
+            name="price"
           />
+          {/* <SortInput
+            id="rating-sort"
+            value={ratingSort}
+            setValue={setRatingSort}
+            setUserPrice={setUserPrice}
+            name="rating"
+          /> */}
         </div>
       </div>
       <button className="submit-button">submit</button>
@@ -126,31 +135,14 @@ const Form = ({ products, setProducts }) => {
 Form.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      productName: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      vehicleType: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
       aspectRatio: PropTypes.number.isRequired,
-      construction: PropTypes.string.isRequired,
-      rimDiameter: PropTypes.number.isRequired,
-      loadIndex: PropTypes.number.isRequired,
-      speedRating: PropTypes.string.isRequired,
       brand: PropTypes.string.isRequired,
-      seasonCategory: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
       image: PropTypes.string.isRequired,
-      availability: PropTypes.string.isRequired,
-      treadDepth: PropTypes.number.isRequired,
-      treadWearRating: PropTypes.number.isRequired,
-      treadPattern: PropTypes.string.isRequired,
-      wetTractionRating: PropTypes.string.isRequired,
-      dryTractionRating: PropTypes.string.isRequired,
-      noiseLevel: PropTypes.string.isRequired,
-      sidewallStyle: PropTypes.string.isRequired,
-      runFlat: PropTypes.bool.isRequired,
-      reinforcedSidewalls: PropTypes.bool.isRequired,
-      fuelEfficiencyRating: PropTypes.string.isRequired,
+      model: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      rating: PropTypes.number.isRequired,
+      width: PropTypes.number.isRequired,
+      rimDiameter: PropTypes.number.isRequired,
     })
   ),
   setProducts: PropTypes.func.isRequired,

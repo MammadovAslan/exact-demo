@@ -8,7 +8,5 @@
   grid-gap: 2rem;
   margin: 2rem;
 
-  &:hover > .product:not(:hover) {
-    background-color: $lightGray;
-  }
+
 }

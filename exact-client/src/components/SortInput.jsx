@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-const SortInput = ({ id, setValue, value, setUserPrice }) => {
+const SortInput = ({ id, setValue, value, setUserPrice, name }) => {
   const handleOptionChange = (event) => {
     setValue(+event.target.value);
     setUserPrice(true);
@@ -9,9 +9,12 @@ const SortInput = ({ id, setValue, value, setUserPrice }) => {
     setValue(null);
     setUserPrice(true);
   };
+
+  const type = name[0].toUpperCase() + name.slice(1);
+
   return (
     <div className="sort-container">
-      <h4 className="title">Sort Price</h4>
+      <h4 className="title">Sort {type}</h4>
       <div className="input-container">
         <input
           className="sort-input lower"
@@ -45,5 +48,6 @@ SortInput.propTypes = {
   setValue: PropTypes.func.isRequired,
   value: PropTypes.number,
   setUserPrice: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 };
 export default SortInput;

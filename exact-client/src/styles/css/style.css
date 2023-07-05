@@ -53,9 +53,6 @@ label {
   grid-gap: 2rem;
   margin: 2rem;
 }
-.products-container:hover > .product:not(:hover) {
-  background-color: rgb(240, 235, 235);
-}
 
 section {
   display: flex;
@@ -223,6 +220,11 @@ section .text-shadow:hover {
   padding: 1rem 2rem;
   row-gap: 1rem;
 }
+@media (max-width: 568px) {
+  .form {
+    padding: 0.5em;
+  }
+}
 .form .selects-container {
   grid-column: 1/3;
   transition: 0.2s ease;
@@ -240,13 +242,7 @@ section .text-shadow:hover {
   display: flex;
   align-items: start;
   grid-column: 1/3;
-  gap: 2rem;
-}
-@media (max-width: 568px) {
-  .form .controls {
-    flex-direction: column;
-    gap: 0;
-  }
+  gap: 3rem;
 }
 .form .controls .title {
   font-weight: 600;
@@ -261,7 +257,7 @@ section .text-shadow:hover {
 }
 .form .submit-button {
   text-transform: uppercase;
-  background-color: rgb(182, 175, 175);
+  background-color: rgb(142, 142, 238);
   color: #fff;
 }
 .form .submit-button:hover {
@@ -290,6 +286,7 @@ section .text-shadow:hover {
 .price-inputs-container .price-container .inputs-container {
   display: flex;
   gap: 1rem;
+  flex-direction: column;
 }
 .price-inputs-container .price-container .inputs-container .price-input-label {
   display: flex;
@@ -332,6 +329,7 @@ section .text-shadow:hover {
 .container .slider__track {
   background-color: #ced4da;
   width: 100%;
+  z-index: -1;
 }
 .container .slider__range {
   background-color: rgb(142, 142, 238);
@@ -386,8 +384,7 @@ section .text-shadow:hover {
 
 .sort-inputs-container {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  gap: 3rem;
   height: 100%;
   flex: 2;
 }
@@ -398,6 +395,12 @@ section .text-shadow:hover {
   justify-content: space-between;
   gap: 0.5rem;
 }
+@media (max-width: 568px) {
+  .sort-inputs-container .sort-container {
+    align-items: center;
+    gap: 1rem;
+  }
+}
 .sort-inputs-container .sort-container .input-container .sort-input {
   display: none;
 }
@@ -405,6 +408,7 @@ section .text-shadow:hover {
   width: 0.35rem;
   height: 2px;
   background-color: rgb(13, 107, 13);
+  border: none;
   transform: rotate(45deg);
   left: -18%;
   top: 50%;
@@ -424,7 +428,15 @@ section .text-shadow:hover {
 .sort-inputs-container .sort-container .input-container label:before, .sort-inputs-container .sort-container .input-container label:after {
   position: absolute;
   content: "";
-  transition: 0.2s ease;
+  transition: 0.1s ease;
+}
+.sort-inputs-container .sort-container .input-container label:before {
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  left: -15px;
+  top: 3px;
 }
 .sort-inputs-container .sort-container .input-container label:hover {
   color: rgb(13, 107, 13);
@@ -435,7 +447,7 @@ section .text-shadow:hover {
 }
 .sort-inputs-container .sort-container .reset-button {
   padding: 0.2rem 0.5rem;
-  background-color: rgb(142, 142, 238);
+  background-color: rgb(182, 175, 175);
   border-radius: 4px;
   text-transform: uppercase;
   color: #fff;

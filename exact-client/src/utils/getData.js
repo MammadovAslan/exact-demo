@@ -10,7 +10,7 @@ const getData = async (expr, setProducts, sort, order = 0) => {
       body: JSON.stringify({
         limit: 20,
         expr: expr,
-        sort: sort || "price",
+        sort: sort || "",
         reverse: order,
       }),
     });
@@ -26,4 +26,4 @@ export default getData;
 // "brand in ['Michelin','Continental']"
 // "width in [255]"
 // "aspectRatio in [60]"
-// "rimDiameter in [18]"
+// "rimDiameter in [15]"
