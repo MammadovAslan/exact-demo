@@ -2,13 +2,10 @@ import { useEffect, memo } from "react";
 import PropTypes from "prop-types";
 import Product from "./Product";
 import getData from "../utils/getData";
-import { v4 as uuidv4 } from "uuid";
 const ProductsContainer = ({ products, setProducts }) => {
   useEffect(() => {
     getData(true, setProducts);
   }, []);
-
-  console.log(products);
 
   return (
     <div className="products-container">
@@ -25,7 +22,7 @@ const ProductsContainer = ({ products, setProducts }) => {
             width={el.width}
             brand={el.brand}
             rating={el.rating}
-            key={uuidv4()}
+            key={el.id}
           />
         ))}
     </div>
