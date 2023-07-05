@@ -434,7 +434,7 @@ section .text-shadow:hover {
 .sort-inputs-container .sort-container .input-container label:before {
   width: 0.7rem;
   height: 0.7rem;
-  border: 1px solid black;
+  border: 1px solid rgb(182, 175, 175);
   border-radius: 50%;
   left: -15px;
   top: 3px;

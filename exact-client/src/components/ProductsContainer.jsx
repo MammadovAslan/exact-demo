@@ -2,6 +2,7 @@ import { useEffect, memo } from "react";
 import PropTypes from "prop-types";
 import Product from "./Product";
 import getData from "../utils/getData";
+
 const ProductsContainer = ({ products, setProducts }) => {
   useEffect(() => {
     getData(true, setProducts);

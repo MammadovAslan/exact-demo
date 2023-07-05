@@ -4,7 +4,6 @@ import Dropdown from "./Dropdown";
 import { getProperty, getPrice } from "../utils/getProperty";
 import getData from "../utils/getData";
 import PriceInput from "./PriceInput";
-import RangeSlider from "./RangeSlider";
 import { queryStringify } from "../utils/helpers";
 import SortInput from "./SortInput";
 
@@ -14,7 +13,6 @@ const Form = ({ products, setProducts }) => {
   const [aspectRatioOptions, setAspectRatioOptions] = useState([]);
   const [rimDiameterOptions, setRimDiameterOptions] = useState([]);
   const [priceSort, setPriceSort] = useState(null);
-  const [ratingSort, setRatingSort] = useState(null);
 
   const [userPrice, setUserPrice] = useState(false);
 
