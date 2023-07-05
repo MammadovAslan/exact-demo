@@ -9,7 +9,7 @@ const Product = ({ image, price, model, width, aspectRatio, rimDiameter, brand, 
         {" "}
         {brand} - {model}
       </h3>
-      <span>{rating}</span>
+      <span className="rating">Rating: {rating}</span>
       <div className="content">
         <div className="characteristics">
           <div className="tire-width">Width: {width}</div>
