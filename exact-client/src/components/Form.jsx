@@ -112,15 +112,6 @@ const Form = ({ products, setProducts }) => {
             minPrice={minPrice}
             maxPrice={maxPrice}
           />
-
-          {/* <RangeSlider
-            onChange={({ min, max }) => {
-              setQueries((prev) => ({ ...prev, minPrice: min, maxPrice: max }));
-              setUserPrice(true);
-            }}
-            min={50}
-            max={5000}
-          /> */}
         </div>
         <div className="sort-inputs-container">
           <SortInput
@@ -130,13 +121,6 @@ const Form = ({ products, setProducts }) => {
             setUserPrice={setUserPrice}
             name="price"
           />
-          {/* <SortInput
-            id="rating-sort"
-            value={ratingSort}
-            setValue={setRatingSort}
-            setUserPrice={setUserPrice}
-            name="rating"
-          /> */}
         </div>
       </div>
       <button className="submit-button">submit</button>
