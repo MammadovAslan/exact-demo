@@ -6,16 +6,23 @@ import getData from "../utils/getData";
 import PriceInput from "./PriceInput";
 import { queryStringify } from "../utils/helpers";
 import SortInput from "./SortInput";
+import { useQueriesStore } from "../zustand/store";
 
 const Form = ({ products, setProducts }) => {
   const [brandsOptions, setBrands] = useState([]);
   const [widthOptions, setWidthOptions] = useState([]);
   const [aspectRatioOptions, setAspectRatioOptions] = useState([]);
   const [rimDiameterOptions, setRimDiameterOptions] = useState([]);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
   const [priceSort, setPriceSort] = useState(null);
 
   const [userPrice, setUserPrice] = useState(false);
 
+  const dataOptions = useQueriesStore.getState().queries;
+  const setDataOptions = useQueriesStore((state) => state.setQueries);
+
+  const [queriesString, setQueriesString] = useState("");
   const [queries, setQueries] = useState({
     brand: [],
     width: [],
@@ -25,37 +32,44 @@ const Form = ({ products, setProducts }) => {
     maxPrice: 0,
   });
 
-  const [queriesString, setQueriesString] = useState("");
+  const fetchData = async () => {
+    try {
+      const data = await getData(
+        queriesString || true,
+        priceSort && "price",
+        priceSort && priceSort
+      );
+      setProducts(data.result);
+
+      setDataOptions({
+        maxPrice: data.aggregation["max:price"],
+        minPrice: data.aggregation["min:price"],
+        width: data.aggregation["distinct:width"],
+        aspectRatio: data.aggregation["distinct:aspectRatio"],
+        rimDiameter: data.aggregation["distinct:rimDiameter"],
+        brand: data.aggregation["distinct:brand"],
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getData(
-      queriesString || true,
-      setProducts,
-      priceSort ? "price" : "",
-      priceSort ? priceSort : 0
-    );
+    fetchData();
   };
 
   useEffect(() => {
-    if (products.length > 0) {
-      if (!userPrice) {
-        //get min and max prices
-        setQueries((prev) => ({
-          ...prev,
-          minPrice: getPrice(products, true),
-          maxPrice: getPrice(products, false),
-        }));
-      }
-
-      //get select options
-      setBrands(getProperty(products, "brand"));
-      setWidthOptions(getProperty(products, "width"));
-      setAspectRatioOptions(getProperty(products, "aspectRatio"));
-      setRimDiameterOptions(getProperty(products, "rimDiameter"));
+    if (dataOptions.brand.length > 0) {
+      setBrands(dataOptions.brand);
+      setWidthOptions(dataOptions.width);
+      setAspectRatioOptions(dataOptions.aspectRatio);
+      setRimDiameterOptions(dataOptions.rimDiameter);
+      setMinPrice(dataOptions.minPrice);
+      setMaxPrice(dataOptions.maxPrice);
       setUserPrice(false);
     }
-  }, [products]);
+  }, [dataOptions]);
 
   useEffect(() => {
     setQueriesString(queryStringify(queries));
@@ -95,8 +109,8 @@ const Form = ({ products, setProducts }) => {
           <PriceInput
             setUserPrice={setUserPrice}
             setValue={setQueries}
-            minPrice={queries.minPrice}
-            maxPrice={queries.maxPrice}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
           />
 
           {/* <RangeSlider

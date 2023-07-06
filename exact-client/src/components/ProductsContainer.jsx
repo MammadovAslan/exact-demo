@@ -2,12 +2,31 @@ import { useEffect, memo } from "react";
 import PropTypes from "prop-types";
 import Product from "./Product";
 import getData from "../utils/getData";
-
+import { useQueriesStore } from "../zustand/store";
 const ProductsContainer = ({ products, setProducts }) => {
-  useEffect(() => {
-    getData(true, setProducts);
-  }, []);
+  const setQueries = useQueriesStore((state) => state.setQueries);
 
+  const fetchData = async () => {
+    try {
+      const data = await getData(true);
+      setProducts(data.result);
+
+      setQueries({
+        maxPrice: data.aggregation["max:price"],
+        minPrice: data.aggregation["min:price"],
+        width: data.aggregation["distinct:width"],
+        aspectRatio: data.aggregation["distinct:aspectRatio"],
+        rimDiameter: data.aggregation["distinct:rimDiameter"],
+        brand: data.aggregation["distinct:brand"],
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className="products-container">
       {products &&

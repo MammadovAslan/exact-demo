@@ -14,7 +14,7 @@ const Dropdown = ({ options, placeholder, setValue, property }) => {
     <label className="select-label">
       {placeholder}
       <Select
-        options={options.length > 0 && options.map((option) => ({ value: option, label: option }))}
+        options={options?.length > 0 && options.map((option) => ({ value: option, label: option }))}
         placeholder={placeholder}
         onChange={handleSelectChange}
         isMulti
@@ -24,11 +24,13 @@ const Dropdown = ({ options, placeholder, setValue, property }) => {
 };
 
 Dropdown.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.arrayOf(PropTypes.number),
+  ]).isRequired,
   placeholder: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
   property: PropTypes.string.isRequired,
-  // multi: PropTypes.bool
 };
 
 export default Dropdown;
