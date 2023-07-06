@@ -36,7 +36,7 @@ const Form = ({ products, setProducts }) => {
       const data = await getData(
         queriesString || true,
         priceSort && "price",
-        priceSort && priceSort
+        priceSort ? priceSort : 0
       );
       setProducts(data.result);
 
