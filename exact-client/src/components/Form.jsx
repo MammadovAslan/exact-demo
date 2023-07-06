@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { useState, useEffect, memo } from "react";
 import Dropdown from "./Dropdown";
-import { getProperty, getPrice } from "../utils/getProperty";
 import getData from "../utils/getData";
 import PriceInput from "./PriceInput";
 import { queryStringify } from "../utils/helpers";
