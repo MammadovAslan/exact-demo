@@ -16,7 +16,7 @@ const Form = ({ products, setProducts }) => {
   const [maxPrice, setMaxPrice] = useState(0);
   const [priceSort, setPriceSort] = useState(null);
 
-  const [userPrice, setUserPrice] = useState(false);
+  const [userPrice, setUserPrice] = useState(true);
 
   const dataOptions = useQueriesStore.getState().queries;
   const setDataOptions = useQueriesStore((state) => state.setQueries);
@@ -64,8 +64,11 @@ const Form = ({ products, setProducts }) => {
       setWidthOptions(dataOptions.width);
       setAspectRatioOptions(dataOptions.aspectRatio);
       setRimDiameterOptions(dataOptions.rimDiameter);
-      setMinPrice(dataOptions.minPrice);
-      setMaxPrice(dataOptions.maxPrice);
+
+      if (userPrice) {
+        setMinPrice(dataOptions.minPrice);
+        setMaxPrice(dataOptions.maxPrice);
+      }
       setUserPrice(false);
     }
   }, [dataOptions]);

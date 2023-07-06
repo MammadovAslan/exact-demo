@@ -14,7 +14,10 @@ export const queryStringify = (queries) => {
       }
 
       string += `${key} in [${selects.join(",")}]`;
-    } else if (key === "minPrice" || key === "maxPrice") {
+    } else if (
+      (key === "minPrice" && queries[key] !== 0) ||
+      (key === "maxPrice" && queries[key] !== 0)
+    ) {
       const operator = key === "minPrice" ? ">=" : "<=";
       if (!isFirst) {
         string += " and ";
