@@ -14,6 +14,7 @@ const Dropdown = ({ options, placeholder, setValue, property }) => {
     <label className="select-label">
       {placeholder}
       <Select
+        isDisabled={options?.length === 0}
         options={options?.length > 0 && options.map((option) => ({ value: option, label: option }))}
         placeholder={placeholder}
         onChange={handleSelectChange}

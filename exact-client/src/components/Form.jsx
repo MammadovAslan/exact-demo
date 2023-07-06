@@ -59,7 +59,7 @@ const Form = ({ products, setProducts }) => {
   };
 
   useEffect(() => {
-    if (dataOptions.brand.length > 0) {
+    if (dataOptions?.brand?.length > 0) {
       setBrands(dataOptions.brand);
       setWidthOptions(dataOptions.width);
       setAspectRatioOptions(dataOptions.aspectRatio);

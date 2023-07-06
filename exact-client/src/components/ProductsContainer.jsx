@@ -23,10 +23,14 @@ const ProductsContainer = ({ products, setProducts }) => {
       console.error(error);
     }
   };
-  
+
   useEffect(() => {
     fetchData();
   }, []);
+
+  if (products.length === 0) {
+    return <div>No results</div>;
+  }
   return (
     <div className="products-container">
       {products &&
