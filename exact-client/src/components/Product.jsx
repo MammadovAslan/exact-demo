@@ -3,7 +3,14 @@ import PropTypes from "prop-types";
 const Product = ({ image, price, model, width, aspectRatio, rimDiameter, brand, rating }) => {
   return (
     <div className="product">
-      <img src={image} alt={model} className="tire-image" width="200px" height="200px" />
+      <img
+        src={image}
+        alt={model}
+        className="tire-image"
+        loading="lazy"
+        width="200px"
+        height="200px"
+      />
       <h1 className="price">{price}</h1>
       <h3 className="name">
         {" "}
