@@ -40,7 +40,7 @@ const ProductsContainer = ({ products, setProducts }) => {
             aspectRatio={el.aspectRatio}
             rimDiameter={el.rimDiameter}
             id={el.id}
-            image={el.image}
+            image={el.image_thumb}
             model={el.model}
             price={el.price}
             width={el.width}
