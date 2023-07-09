@@ -133,20 +133,6 @@ section .text-shadow:hover {
 .product .image-container .tire-image {
   width: 100%;
 }
-.product .content {
-  position: absolute;
-  height: 18rem;
-  top: 100%;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background-color: #fff;
-  transition: top 0.2s ease;
-}
-.product:hover .content {
-  top: 0;
-  height: 100%;
-}
 .product .price {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
@@ -422,7 +408,7 @@ section .text-shadow:hover {
 }
 .sort-inputs-container .sort-container .reset-button {
   padding: 0.2rem 0.5rem;
-  background-color: rgb(182, 175, 175);
+  background-color: #514d4d;
   border-radius: 4px;
   text-transform: uppercase;
   color: #fff;

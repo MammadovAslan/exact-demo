@@ -20,25 +20,10 @@
   }
 
   .image-container {
+
     .tire-image {
       width: 100%;
     }
-  }
-
-  .content {
-    position: absolute;
-    height: 18rem;
-    top: 100%;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-    background-color: $white;
-    transition: top 0.2s ease;
-  }
-
-  &:hover .content {
-    top: 0;
-    height: 100%;
   }
 
   .price {
