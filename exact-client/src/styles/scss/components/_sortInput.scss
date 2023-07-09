@@ -73,6 +73,7 @@
       border-radius: 4px;
       text-transform: uppercase;
       color: #fff;
+      font-weight: 600;
       @include easeTransition(0.2s);
       &:hover {
         opacity: 0.6;

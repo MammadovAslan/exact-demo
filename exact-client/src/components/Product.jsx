@@ -27,14 +27,14 @@ const Product = ({ image, price, model, brand, rating }) => {
       <div className="image-container">
         <img src={image} alt={model} className="tire-image" height="160px" loading="lazy" />
       </div>
-      <h1 className="price">{price}</h1>
-      <h3 className="name">
+      <p className="price">{price}</p>
+      <p className="name">
         {" "}
         {brand} - {model}
-      </h3>
+      </p>
       <div className="rating">
-        <span className="rating-number">Rating: {rating}</span>
         <span className="rating-stars">{renderStars()}</span>
+        <span className="rating-number">{rating}</span>
       </div>
     </div>
   );
