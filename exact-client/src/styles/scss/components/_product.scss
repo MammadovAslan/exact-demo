@@ -74,3 +74,12 @@
     }
   }
 }
+
+.product.skeleton {
+  box-shadow: none;
+  .react-loading-skeleton {
+    height: 24rem;
+    width: 12rem;
+  }
+  color: #d7d0d0;
+}

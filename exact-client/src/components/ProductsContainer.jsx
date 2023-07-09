@@ -1,14 +1,19 @@
-import { useEffect, memo } from "react";
+import { useEffect, useState, memo } from "react";
 import PropTypes from "prop-types";
 import Product from "./Product";
 import { useQueriesStore } from "../zustand/store";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import data from "../data/index.json";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const ProductsContainer = ({ products, setProducts }) => {
   const setQueries = useQueriesStore((state) => state.setQueries);
   const apiUrl = import.meta.env.VITE_API_URL;
 
+  const [loading, setLoading] = useState(true);
+
   const fetchData = async () => {
+    setLoading(true);
     try {
       // const response = await fetch(`${apiUrl}/index`, {
       //   method: "GET",
@@ -27,11 +32,29 @@ const ProductsContainer = ({ products, setProducts }) => {
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  if (loading) {
+    // Display skeleton loading animations while loading
+    return (
+      <div className="products-container">
+        {Array.from({ length: 20 }).map((_, index) => (
+          <div key={index} className="product skeleton">
+            <SkeletonTheme baseColor="#e9e1e1" highlightColor="#d7d0d0">
+              <p>
+                <Skeleton count={3} />
+              </p>
+            </SkeletonTheme>{" "}
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   if (products.length === 0) {
     return <div>No results</div>;

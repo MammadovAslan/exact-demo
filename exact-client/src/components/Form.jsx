@@ -107,7 +107,7 @@ const Form = ({ products, setProducts }) => {
       </div>
       <div className="controls">
         <div className="price-inputs-container">
-          <h4 className="title">Price:</h4>
+          <h1 className="title">Price:</h1>
           <PriceInput
             setUserPrice={setUserPrice}
             setValue={setQueries}

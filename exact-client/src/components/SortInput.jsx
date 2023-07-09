@@ -14,7 +14,7 @@ const SortInput = ({ id, setValue, value, setUserPrice, name }) => {
 
   return (
     <div className="sort-container">
-      <h4 className="title">Sort {type}</h4>
+      <h2 className="title">Sort {type}</h2>
       <div className="input-container">
         <input
           className="sort-input lower"
