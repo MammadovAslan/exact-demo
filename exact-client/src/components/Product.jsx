@@ -25,14 +25,7 @@ const Product = ({ image, price, model, width, aspectRatio, rimDiameter, brand, 
   return (
     <div className="product">
       <div className="image-container">
-        <img
-          src={image}
-          alt={model}
-          className="tire-image"
-          loading="lazy"
-          width="200px"
-          height="200px"
-        />
+        <img src={image} alt={model} className="tire-image" width="200px" height="200px" />
       </div>
       <h1 className="price">{price}</h1>
       <h3 className="name">
