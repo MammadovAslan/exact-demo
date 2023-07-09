@@ -19,8 +19,10 @@
     padding: 0.5rem;
   }
 
-  .tire-image {
-    width: 10rem;
+  .image-container {
+    .tire-image {
+      width: 100%;
+    }
   }
 
   .content {
@@ -52,6 +54,16 @@
   .description {
     margin-bottom: 1rem;
     font-weight: 600;
+  }
+
+  .rating {
+    display: flex;
+    flex-direction: column;
+    .rating-stars {
+      color: rgb(241, 206, 9);
+      -webkit-text-stroke-width: 2px;
+      -webkit-text-stroke-color: red;
+    }
   }
 
   .characteristics {
