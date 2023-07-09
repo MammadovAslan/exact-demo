@@ -72,31 +72,21 @@ section h1 {
   animation-fill-mode: forwards;
   position: relative;
 }
-section h1:after {
-  content: "";
-  position: absolute;
-  height: 5px;
-  width: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #fff;
-  box-shadow: 2px 2px 10px #2962ff;
-}
 @media (max-width: 988px) {
   section h1 {
     font-size: 1.3em;
   }
 }
 section .text-shadow {
-  font-style: italic;
   text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: #fff;
-  -webkit-text-stroke-width: 1px;
-  text-shadow: 2px 2px 10px #2962ff;
-  transition: all 0.5s ease-in-out;
   text-align: center;
   letter-spacing: 0.2em;
+}
+section .text-shadow span {
+  background-color: orange;
+  padding: 0.2rem 0rem 0.2rem 0.6rem;
+  border-radius: 12px;
+  color: #111;
 }
 section .text-shadow:hover {
   color: #fff;
