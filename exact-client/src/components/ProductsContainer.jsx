@@ -12,9 +12,6 @@ const ProductsContainer = ({ products, setProducts }) => {
       try {
         const response = await fetch(`${apiUrl}/index`, {
           method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
         });
         const data = await response.json();
         setProducts(data.result);
