@@ -2,6 +2,7 @@ import { useEffect, memo } from "react";
 import PropTypes from "prop-types";
 import Product from "./Product";
 import { useQueriesStore } from "../zustand/store";
+import data from "../data/index.json";
 
 const ProductsContainer = ({ products, setProducts }) => {
   const setQueries = useQueriesStore((state) => state.setQueries);
@@ -9,10 +10,10 @@ const ProductsContainer = ({ products, setProducts }) => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/index`, {
-        method: "GET",
-      });
-      const data = await response.json();
+      // const response = await fetch(`${apiUrl}/index`, {
+      //   method: "GET",
+      // });
+      // const data = await response.json();
       setProducts(data.result);
 
       setQueries({
