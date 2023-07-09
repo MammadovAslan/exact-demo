@@ -2,18 +2,18 @@ import { useEffect, memo } from "react";
 import PropTypes from "prop-types";
 import Product from "./Product";
 import { useQueriesStore } from "../zustand/store";
+import data from "../data/index.json";
 
 const ProductsContainer = ({ products, setProducts }) => {
   const setQueries = useQueriesStore((state) => state.setQueries);
   const apiUrl = import.meta.env.VITE_API_URL;
 
   const fetchData = async () => {
-    try {
       try {
-        const response = await fetch(`${apiUrl}/index`, {
-          method: "GET",
-        });
-        const data = await response.json();
+        // const response = await fetch(`${apiUrl}/index`, {
+        //   method: "GET",
+        // });
+        // const data = await response.json();
         setProducts(data.result);
 
         setQueries({
@@ -27,13 +27,12 @@ const ProductsContainer = ({ products, setProducts }) => {
       } catch (error) {
         console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
+
   };
 
   useEffect(() => {
     fetchData();
+    console.log
   }, []);
 
   if (products.length === 0) {
