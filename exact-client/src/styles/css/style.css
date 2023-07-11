@@ -63,13 +63,12 @@ section {
   font-size: 2em;
   background: #212121;
   color: #fff;
-  text-transform: uppercase;
+  text-transform: capitalize;
   gap: 30px;
   overflow: hidden;
 }
 section h1 {
   font-size: 1.5em;
-  animation-fill-mode: forwards;
   position: relative;
 }
 @media (max-width: 988px) {
@@ -78,7 +77,6 @@ section h1 {
   }
 }
 section .text-shadow {
-  text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.2em;
 }
@@ -119,6 +117,9 @@ section .text-shadow:hover {
   .product {
     padding: 0.5rem;
   }
+}
+.product .image-container {
+  flex: 2;
 }
 .product .image-container .tire-image {
   width: 100%;
@@ -167,6 +168,14 @@ section .text-shadow:hover {
 .product .characteristics .availability {
   flex-basis: 50%;
   margin-bottom: 0.5rem;
+}
+.product .link {
+  align-self: flex-end;
+}
+.product .link .page-link {
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .product.skeleton {

@@ -39,7 +39,7 @@ const Form = ({ products, setProducts }) => {
         priceSort ? priceSort : 0
       );
       setProducts(data.result);
-
+      console.log(data.result);
       setDataOptions({
         maxPrice: data.aggregation["max:price"],
         minPrice: data.aggregation["min:price"],

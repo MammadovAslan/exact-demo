@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
-const Product = ({ image, price, model, brand, rating }) => {
+const Product = ({ image, price, model, brand, rating, link }) => {
+  const apiUrl = import.meta.env.VITE_TIRE_URL;
+
   const renderStars = () => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -36,6 +38,11 @@ const Product = ({ image, price, model, brand, rating }) => {
         <span className="rating-stars">{renderStars()}</span>
         <span className="rating-number">{rating}</span>
       </div>
+      <div className="link">
+        <a href={`${apiUrl}/${link}`} rel="noreferrer" target="_blank" className="page-link">
+          link
+        </a>
+      </div>
     </div>
   );
 };
@@ -44,6 +51,7 @@ Product.propTypes = {
   brand: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   model: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
 };

@@ -15,12 +15,12 @@ const ProductsContainer = ({ products, setProducts }) => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      // const response = await fetch(`${apiUrl}/index`, {
-      //   method: "GET",
-      // });
-      // const data = await response.json();
+      const response = await fetch(`${apiUrl}/index`, {
+        method: "GET",
+      });
+      const data = await response.json();
       setProducts(data.result);
-
+      //TODO add images in database
       setQueries({
         maxPrice: data.aggregation["max:price"],
         minPrice: data.aggregation["min:price"],
@@ -71,6 +71,7 @@ const ProductsContainer = ({ products, setProducts }) => {
             price={el.price}
             brand={el.brand}
             rating={el.rating}
+            link={el.page}
             key={el.id}
           />
         ))}
