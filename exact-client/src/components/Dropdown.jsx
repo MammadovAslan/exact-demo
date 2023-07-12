@@ -7,21 +7,26 @@ const Dropdown = ({ options, placeholder, setValue, property, multiSelect }) => 
 
     if (Array.isArray(selectedOption)) {
       selectedValue = selectedOption.map((option) => {
-        return isNaN(+option.value) ? option.value : +option.value;
+        return option.value;
       });
     } else {
-      selectedValue = selectedOption.value;
+      selectedValue = selectedOption.value || '';
     }
 
     setValue((prev) => ({ ...prev, [property]: selectedValue }));
   };
+
+  const defaultOptions =
+    options?.length > 0 && options.map((option) => ({ value: option, label: option }));
+
+  defaultOptions && !multiSelect && defaultOptions.unshift({ value: "", label: "any" });
 
   return (
     <label className="select-label">
       {placeholder}
       <Select
         isDisabled={options?.length === 0 || !options}
-        options={options?.length > 0 && options.map((option) => ({ value: option, label: option }))}
+        options={defaultOptions}
         placeholder={placeholder}
         onChange={handleSelectChange}
         isMulti={multiSelect}
