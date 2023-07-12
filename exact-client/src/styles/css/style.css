@@ -54,6 +54,16 @@ label {
   margin: 2rem;
 }
 
+.no-results {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  height: 20dvh;
+}
+
 section {
   display: flex;
   flex-direction: column;

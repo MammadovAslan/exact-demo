@@ -27,7 +27,9 @@ const Product = ({ image, price, model, brand, rating, link }) => {
   return (
     <div className="product">
       <div className="image-container">
-        <img src={image} alt={model} className="tire-image" height="160px" loading="lazy" />
+        <a href={`${apiUrl}/${link}`} rel="noreferrer" target="_blank" className="page-link">
+          <img src={image} alt={model} className="tire-image" height="160px" loading="lazy" />
+        </a>
       </div>
       <p className="price">{price}</p>
       <p className="name">
@@ -38,11 +40,7 @@ const Product = ({ image, price, model, brand, rating, link }) => {
         <span className="rating-stars">{renderStars()}</span>
         <span className="rating-number">{rating}</span>
       </div>
-      <div className="link">
-        <a href={`${apiUrl}/${link}`} rel="noreferrer" target="_blank" className="page-link">
-          link
-        </a>
-      </div>
+      <div className="link"></div>
     </div>
   );
 };

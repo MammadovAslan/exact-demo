@@ -7,6 +7,11 @@
   place-items: center;
   grid-gap: 2rem;
   margin: 2rem;
+}
 
-
+.no-results {
+  @include flexCenter(row);
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  height: 20dvh;
 }

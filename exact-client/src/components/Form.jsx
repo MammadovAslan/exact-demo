@@ -20,13 +20,14 @@ const Form = ({ products, setProducts }) => {
 
   const dataOptions = useQueriesStore.getState().queries;
   const setDataOptions = useQueriesStore((state) => state.setQueries);
+  const storeQueries = useQueriesStore((state) => state.queries);
 
   const [queriesString, setQueriesString] = useState("");
   const [queries, setQueries] = useState({
     brand: [],
-    width: [],
-    aspectRatio: [],
-    rimDiameter: [],
+    width: 0,
+    aspectRatio: 0,
+    rimDiameter: 0,
     minPrice: 0,
     maxPrice: 0,
   });
@@ -39,15 +40,16 @@ const Form = ({ products, setProducts }) => {
         priceSort ? priceSort : 0
       );
       setProducts(data.result);
-      console.log(data.result);
-      setDataOptions({
-        maxPrice: data.aggregation["max:price"],
-        minPrice: data.aggregation["min:price"],
-        width: data.aggregation["distinct:width"],
-        aspectRatio: data.aggregation["distinct:aspectRatio"],
-        rimDiameter: data.aggregation["distinct:rimDiameter"],
-        brand: data.aggregation["distinct:brand"],
-      });
+
+      const updatedQueries = { ...storeQueries };
+
+      for (const key in queries) {
+        if (+queries[key] === 0) {
+          updatedQueries[key] = data.aggregation[`distinct:${key}`];
+        }
+      }
+
+      setDataOptions(updatedQueries);
     } catch (error) {
       console.error(error);
     }
@@ -55,7 +57,7 @@ const Form = ({ products, setProducts }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchData();
+    // fetchData();
   };
 
   useEffect(() => {
@@ -77,6 +79,10 @@ const Form = ({ products, setProducts }) => {
     setQueriesString(queryStringify(queries));
   }, [queries]);
 
+  useEffect(() => {
+    queriesString && fetchData();
+  }, [queriesString, priceSort]);
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       <div className="selects-container">
@@ -85,6 +91,7 @@ const Form = ({ products, setProducts }) => {
           placeholder="brand"
           setValue={setQueries}
           property="brand"
+          multiSelect={true}
         />
         <Dropdown
           options={widthOptions}
@@ -125,7 +132,7 @@ const Form = ({ products, setProducts }) => {
           />
         </div>
       </div>
-      <button className="submit-button">submit</button>
+      {/* <button className="submit-button">submit</button> */}
     </form>
   );
 };
@@ -135,7 +142,6 @@ Form.propTypes = {
     PropTypes.shape({
       aspectRatio: PropTypes.number.isRequired,
       brand: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
       model: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       rating: PropTypes.number.isRequired,

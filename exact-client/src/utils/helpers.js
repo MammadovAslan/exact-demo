@@ -3,15 +3,17 @@ export const queryStringify = (queries) => {
   let isFirst = true;
 
   for (const key in queries) {
-    if (Array.isArray(queries[key]) && queries[key].length > 0) {
-      const selects = queries[key].map((el) => {
-        return isNaN(+el) ? `'${el}'` : el;
-      });
+    if (queries[key] !== 0 && queries[key].length !== 0) {
       if (!isFirst) {
         string += " and ";
       } else {
         isFirst = false;
       }
+    }
+    if (Array.isArray(queries[key]) && queries[key].length > 0) {
+      const selects = queries[key].map((el) => {
+        return isNaN(+el) ? `'${el}'` : el;
+      });
 
       string += `${key} in [${selects.join(",")}]`;
     } else if (
@@ -19,12 +21,10 @@ export const queryStringify = (queries) => {
       (key === "maxPrice" && queries[key] !== 0)
     ) {
       const operator = key === "minPrice" ? ">=" : "<=";
-      if (!isFirst) {
-        string += " and ";
-      } else {
-        isFirst = false;
-      }
+
       string += `price${operator}${queries[key]}`;
+    } else if (!isNaN(+queries[key]) && +queries[key] !== 0) {
+      string += `${key} == ${queries[key]}`;
     }
   }
 

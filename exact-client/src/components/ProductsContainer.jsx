@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Product from "./Product";
 import { useQueriesStore } from "../zustand/store";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import data from "../data/index.json";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const ProductsContainer = ({ products, setProducts }) => {
@@ -20,7 +19,6 @@ const ProductsContainer = ({ products, setProducts }) => {
       });
       const data = await response.json();
       setProducts(data.result);
-      //TODO add images in database
       setQueries({
         maxPrice: data.aggregation["max:price"],
         minPrice: data.aggregation["min:price"],
@@ -57,7 +55,7 @@ const ProductsContainer = ({ products, setProducts }) => {
   }
 
   if (products.length === 0) {
-    return <div>No results</div>;
+    return <div className="no-results">*no results</div>;
   }
   return (
     <div className="products-container">
@@ -84,7 +82,6 @@ ProductsContainer.propTypes = {
     PropTypes.shape({
       aspectRatio: PropTypes.number.isRequired,
       brand: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
       model: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       rating: PropTypes.number.isRequired,
