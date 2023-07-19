@@ -24,12 +24,14 @@ const Product = ({ image, price, model, brand, rating, link }) => {
 
     return stars;
   };
+
+  const handleClick = () => {
+    window.open(`${apiUrl}/${link}`);
+  };
   return (
-    <div className="product">
+    <div className="product" onClick={handleClick}>
       <div className="image-container">
-        <a href={`${apiUrl}/${link}`} rel="noreferrer" target="_blank" className="page-link">
-          <img src={image} alt={model} className="tire-image" height="160px" loading="lazy" />
-        </a>
+        <img src={image} alt={model} className="tire-image" height="160px" loading="lazy" />
       </div>
       <p className="price">{price}</p>
       <p className="name">

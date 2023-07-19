@@ -121,12 +121,16 @@ section .text-shadow:hover {
   gap: 1rem;
   overflow: hidden;
   width: 12rem;
+  cursor: pointer;
   transition: 0.2s ease;
 }
 @media (max-width: 568px) {
   .product {
     padding: 0.5rem;
   }
+}
+.product:hover {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 .product .image-container {
   flex: 2;

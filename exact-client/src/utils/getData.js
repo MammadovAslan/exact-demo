@@ -1,4 +1,5 @@
 const apiUrl = import.meta.env.VITE_API_URL;
+// import data from "../data/index.json";
 
 const getData = async (expr, sort, order = 0) => {
   try {
@@ -22,6 +23,7 @@ const getData = async (expr, sort, order = 0) => {
       }),
     });
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

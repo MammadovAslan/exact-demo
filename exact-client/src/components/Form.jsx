@@ -100,16 +100,16 @@ const Form = ({ products, setProducts }) => {
           property="width"
         />
         <Dropdown
-          options={rimDiameterOptions}
-          placeholder="diameter"
-          setValue={setQueries}
-          property="rimDiameter"
-        />
-        <Dropdown
           options={aspectRatioOptions}
           placeholder="ratio"
           setValue={setQueries}
           property="aspectRatio"
+        />
+        <Dropdown
+          options={rimDiameterOptions}
+          placeholder="diameter"
+          setValue={setQueries}
+          property="rimDiameter"
         />
       </div>
       <div className="controls">
